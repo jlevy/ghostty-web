@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostty WASM - Screen Buffer Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        h1 { color: #4ec9b0; }
+        h2 { color: #569cd6; margin-top: 30px; }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .panel {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 6px;
+            padding: 20px;
+        }
+        .terminal {
+            background: #0c0c0c;
+            border: 2px solid #3e3e42;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Cascadia Code', 'Consolas', monospace;
+            font-size: 16px;
+            line-height: 1.4;
+            overflow: auto;
+            min-height: 400px;
+            position: relative;
+        }
+        .terminal-line {
+            white-space: pre;
+            margin: 0;
+        }
+        .cursor {
+            background: #00ff00;
+            color: #000;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+        button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px 5px 5px 0;
+        }
+        button:hover { background: #1177bb; }
+        button.danger { background: #c72e0f; }
+        button.danger:hover { background: #e03e1f; }
+        .info {
+            background: #1e3a5f;
+            border-left: 4px solid #4ec9b0;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .stat {
+            background: #1e1e1e;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4ec9b0;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #858585;
+            text-transform: uppercase;
+        }
+        input[type="text"], input[type="number"] {
+            background: #1e1e1e;
+            border: 1px solid #3e3e42;
+            color: #d4d4d4;
+            padding: 8px;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 5px 0;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            color: #858585;
+            font-size: 13px;
+        }
+        code {
+            background: #1e1e1e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #ce9178;
+            font-family: 'Cascadia Code', monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖥️ Ghostty WASM - Screen Buffer Demo</h1>
+    
+    <div class="info" id="status-banner">
+        <strong>⏳ Loading...</strong><br>
+        Initializing ScreenBuffer module...
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-value" id="cursor-pos">0, 0</div>
+            <div class="stat-label">Cursor Position</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="buffer-size">80x24</div>
+            <div class="stat-label">Buffer Size</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="scrollback-size">0</div>
+            <div class="stat-label">Scrollback Lines</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="panel">
+            <h2>📝 Text Input</h2>
+            
+            <label>Enter text to write:</label>
+            <input type="text" id="text-input" placeholder="Hello, World!" value="Hello, World!">
+            <button onclick="writeText()">Write Text</button>
+            <button onclick="writeMultiline()">Write Multiline</button>
+            
+            <h3 style="margin-top: 20px;">Test Wide Characters</h3>
+            <button onclick="writeText('中文测试')">Write Chinese</button>
+            <button onclick="writeText('日本語テスト')">Write Japanese</button>
+            <button onclick="writeText('😀🎉🚀💻')">Write Emoji</button>
+            <button onclick="writeText('café')">Write Combining (é)</button>
+
+            <h3 style="margin-top: 20px;">Cursor Control</h3>
+            <label>X Position:</label>
+            <input type="number" id="cursor-x" value="0" min="0" max="79">
+            <label>Y Position:</label>
+            <input type="number" id="cursor-y" value="0" min="0" max="23">
+            <button onclick="moveCursor()">Move Cursor</button>
+            <button onclick="saveCursor()">Save Cursor</button>
+            <button onclick="restoreCursor()">Restore Cursor</button>
+
+            <h3 style="margin-top: 20px;">Scrolling</h3>
+            <button onclick="scrollUp()">Scroll Up</button>
+            <button onclick="scrollDown()">Scroll Down</button>
+            <button onclick="fillAndScroll()">Fill & Auto-Scroll</button>
+
+            <h3 style="margin-top: 20px;">Scroll Regions</h3>
+            <label>Top (0-23):</label>
+            <input type="number" id="region-top" value="5" min="0" max="23">
+            <label>Bottom (0-23):</label>
+            <input type="number" id="region-bottom" value="18" min="0" max="23">
+            <button onclick="setScrollRegion()">Set Region</button>
+            <button onclick="clearScrollRegion()">Clear Region</button>
+            <button onclick="testScrollRegion()">Test Region</button>
+
+            <h3 style="margin-top: 20px;">Modes</h3>
+            <button onclick="toggleAutoWrap()">Toggle AutoWrap</button>
+            <button onclick="toggleInsertMode()">Toggle Insert Mode</button>
+            <button onclick="toggleOriginMode()">Toggle Origin Mode</button>
+
+            <h3 style="margin-top: 20px;">Operations</h3>
+            <button onclick="eraseDisplay()">Erase Display</button>
+            <button onclick="eraseLine()">Erase Line</button>
+            <button onclick="insertLine()">Insert Line</button>
+            <button onclick="deleteLine()">Delete Line</button>
+            <button class="danger" onclick="resetBuffer()">Reset Buffer</button>
+        </div>
+
+        <div class="panel">
+            <h2>🖥️ Terminal Display</h2>
+            <div class="terminal" id="terminal"></div>
+            
+            <div style="margin-top: 15px; font-size: 12px; color: #858585;">
+                <strong>Mode Status:</strong>
+                <div id="mode-status" style="margin-top: 5px;">
+                    AutoWrap: ON | Insert: OFF | Origin: OFF
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>📋 Test Scenarios</h2>
+        <button onclick="testBasicWriting()">1. Basic Writing</button>
+        <button onclick="testWrapping()">2. Test Wrapping</button>
+        <button onclick="testWideChars()">3. Test Wide Chars</button>
+        <button onclick="testScrollRegionDemo()">4. Scroll Region Demo</button>
+        <button onclick="testVimLike()">5. Vim-like Layout</button>
+        <button onclick="testStressTest()">6. Stress Test</button>
+        
+        <div class="info" style="margin-top: 15px;">
+            <strong>What to test:</strong><br>
+            1. Write text and see cursor advance<br>
+            2. Test wrapping at right edge<br>
+            3. Verify wide characters (CJK/emoji) take 2 cells<br>
+            4. Scroll regions work (vim status bar simulation)<br>
+            5. Modes affect behavior (autowrap, insert, origin)<br>
+            6. Scrollback accumulates when screen fills
+        </div>
+    </div>
+
+    <script type="module">
+        // Import ScreenBuffer
+        let ScreenBuffer;
+        try {
+            const module = await import('../lib/buffer.ts');
+            ScreenBuffer = module.ScreenBuffer;
+            console.log('✅ ScreenBuffer loaded successfully');
+        } catch (e) {
+            console.error('❌ Failed to load ScreenBuffer:', e);
+            document.body.innerHTML = `
+                <div style="padding: 40px; background: #fee; color: #c00; border: 2px solid #c00; margin: 20px; border-radius: 8px;">
+                    <h2>⚠️ Import Error</h2>
+                    <p><strong>Failed to load ScreenBuffer module.</strong></p>
+                    <p>Make sure you're running the dev server with Vite:</p>
+                    <pre style="background: #000; color: #0f0; padding: 15px; border-radius: 4px;">$ bun run dev</pre>
+                    <p>Then open: <code>http://localhost:8000/examples/buffer-demo.html</code></p>
+                    <p><strong>Error:</strong> ${e.message}</p>
+                </div>
+            `;
+            throw e;
+        }
+
+        // Global buffer instance
+        window.buffer = new ScreenBuffer(80, 24, 1000);
+        console.log('✅ Buffer instance created:', window.buffer);
+        
+        // Color palette (xterm 256 colors - first 16)
+        const colors = [
+            '#000000', '#cd3131', '#0dbc79', '#e5e510', '#2472c8', '#bc3fbc', 
+            '#11a8cd', '#e5e5e5', '#666666', '#f14c4c', '#23d18b', '#f5f543',
+            '#3b8eea', '#d670d6', '#29b8db', '#ffffff'
+        ];
+
+        function renderBuffer() {
+            const terminal = document.getElementById('terminal');
+            const lines = window.buffer.getAllLines();
+            const cursor = window.buffer.getCursor();
+            const dims = window.buffer.getDimensions();
+            
+            terminal.innerHTML = '';
+            
+            for (let y = 0; y < lines.length; y++) {
+                const line = lines[y];
+                let html = '';
+                
+                for (let x = 0; x < line.length; x++) {
+                    const cell = line[x];
+                    
+                    // Skip padding cells for wide chars
+                    if (cell.width === 0) continue;
+                    
+                    let char = cell.char || ' ';
+                    let style = '';
+                    
+                    // Apply styling
+                    if (cell.bold) style += 'font-weight: bold; ';
+                    if (cell.italic) style += 'font-style: italic; ';
+                    if (cell.underline) style += 'text-decoration: underline; ';
+                    if (cell.faint) style += 'opacity: 0.5; ';
+                    
+                    // Apply colors
+                    if (cell.inverse) {
+                        if (cell.fg.type === 'palette') {
+                            style += `background: ${colors[cell.fg.index]}; `;
+                        }
+                        if (cell.bg.type === 'palette') {
+                            style += `color: ${colors[cell.bg.index]}; `;
+                        }
+                    } else {
+                        if (cell.fg.type === 'palette') {
+                            style += `color: ${colors[cell.fg.index]}; `;
+                        } else if (cell.fg.type === 'rgb') {
+                            style += `color: rgb(${cell.fg.r}, ${cell.fg.g}, ${cell.fg.b}); `;
+                        }
+                        if (cell.bg.type === 'palette') {
+                            style += `background: ${colors[cell.bg.index]}; `;
+                        } else if (cell.bg.type === 'rgb') {
+                            style += `background: rgb(${cell.bg.r}, ${cell.bg.g}, ${cell.bg.b}); `;
+                        }
+                    }
+                    
+                    // Show cursor
+                    const isCursor = (x === cursor.x && y === cursor.y && cursor.visible);
+                    const className = isCursor ? 'cursor' : '';
+                    
+                    if (style || className) {
+                        html += `<span class="${className}" style="${style}">${char}</span>`;
+                    } else {
+                        html += char;
+                    }
+                }
+                
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'terminal-line';
+                lineDiv.innerHTML = html;
+                terminal.appendChild(lineDiv);
+            }
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            const cursor = window.buffer.getCursor();
+            const dims = window.buffer.getDimensions();
+            const scrollback = window.buffer.getScrollback();
+            
+            document.getElementById('cursor-pos').textContent = `${cursor.x}, ${cursor.y}`;
+            document.getElementById('buffer-size').textContent = `${dims.cols}x${dims.rows}`;
+            document.getElementById('scrollback-size').textContent = scrollback.length;
+        }
+
+        // Export functions to window for button onclick
+        window.writeText = function(text) {
+            text = text || document.getElementById('text-input').value;
+            window.buffer.writeString(text);
+            renderBuffer();
+        };
+
+        window.writeMultiline = function() {
+            const lines = [
+                'Line 1: Normal text',
+                'Line 2: More text',
+                'Line 3: Even more!'
+            ];
+            for (const line of lines) {
+                window.buffer.writeString(line);
+                window.buffer.moveCursorTo(0, window.buffer.getCursor().y + 1);
+            }
+            renderBuffer();
+        };
+
+        window.moveCursor = function() {
+            const x = parseInt(document.getElementById('cursor-x').value);
+            const y = parseInt(document.getElementById('cursor-y').value);
+            window.buffer.moveCursorTo(x, y);
+            renderBuffer();
+        };
+
+        window.saveCursor = function() {
+            window.buffer.saveCursor();
+            console.log('Cursor saved');
+        };
+
+        window.restoreCursor = function() {
+            window.buffer.restoreCursor();
+            renderBuffer();
+            console.log('Cursor restored');
+        };
+
+        window.scrollUp = function() {
+            window.buffer.scrollUp(1);
+            renderBuffer();
+        };
+
+        window.scrollDown = function() {
+            window.buffer.scrollDown(1);
+            renderBuffer();
+        };
+
+        window.fillAndScroll = function() {
+            // Fill screen with text to trigger scrolling
+            for (let i = 0; i < 30; i++) {
+                window.buffer.writeString(`Line ${i}: This is a test of automatic scrolling`);
+                const cursor = window.buffer.getCursor();
+                window.buffer.moveCursorTo(0, cursor.y + 1);
+            }
+            renderBuffer();
+        };
+
+        window.setScrollRegion = function() {
+            const top = parseInt(document.getElementById('region-top').value);
+            const bottom = parseInt(document.getElementById('region-bottom').value);
+            window.buffer.setScrollRegion(top, bottom);
+            console.log(`Scroll region set: ${top}-${bottom}`);
+            renderBuffer();
+        };
+
+        window.clearScrollRegion = function() {
+            window.buffer.clearScrollRegion();
+            console.log('Scroll region cleared');
+            renderBuffer();
+        };
+
+        window.testScrollRegion = function() {
+            // Set region
+            window.buffer.setScrollRegion(5, 18);
+            
+            // Fill region with text
+            window.buffer.moveCursorTo(0, 5);
+            for (let i = 0; i < 20; i++) {
+                window.buffer.writeString(`Scroll region line ${i}`);
+                window.buffer.moveCursorTo(0, window.buffer.getCursor().y + 1);
+            }
+            renderBuffer();
+        };
+
+        window.toggleAutoWrap = function() {
+            // Toggle would need state tracking - for demo, just set
+            window.buffer.setAutoWrap(false);
+            setTimeout(() => window.buffer.setAutoWrap(true), 2000);
+            updateModeStatus();
+        };
+
+        window.toggleInsertMode = function() {
+            window.buffer.setInsertMode(true);
+            setTimeout(() => window.buffer.setInsertMode(false), 2000);
+            updateModeStatus();
+        };
+
+        window.toggleOriginMode = function() {
+            window.buffer.setOriginMode(true);
+            setTimeout(() => window.buffer.setOriginMode(false), 2000);
+            updateModeStatus();
+        };
+
+        window.eraseDisplay = function() {
+            window.buffer.eraseInDisplay(2);
+            renderBuffer();
+        };
+
+        window.eraseLine = function() {
+            window.buffer.eraseInLine(2);
+            renderBuffer();
+        };
+
+        window.insertLine = function() {
+            window.buffer.insertLines(1);
+            renderBuffer();
+        };
+
+        window.deleteLine = function() {
+            window.buffer.deleteLines(1);
+            renderBuffer();
+        };
+
+        window.resetBuffer = function() {
+            window.buffer = new ScreenBuffer(80, 24, 1000);
+            renderBuffer();
+        };
+
+        function updateModeStatus() {
+            // This is a simplified display - real implementation would track state
+            document.getElementById('mode-status').textContent = 
+                'AutoWrap: ON | Insert: OFF | Origin: OFF';
+        }
+
+        // ====================================================================
+        // Test Scenarios
+        // ====================================================================
+
+        function resetBuffer() {
+            window.buffer = new ScreenBuffer(80, 24, 1000);
+        }
+
+        window.testBasicWriting = function() {
+            console.log('🧪 Running Test 1: Basic Writing');
+            resetBuffer();
+            window.buffer.writeString('Basic text writing test');
+            window.buffer.moveCursorTo(0, 2);
+            window.buffer.setStyle({ bold: true, fg: { type: 'palette', index: 1 } });
+            window.buffer.writeString('Bold red text');
+            window.buffer.resetStyle();
+            window.buffer.moveCursorTo(0, 4);
+            window.buffer.writeString('Back to normal');
+            renderBuffer();
+            console.log('✅ Test 1 complete');
+        };
+
+        window.testWrapping = function() {
+            console.log('🧪 Running Test 2: Wrapping');
+            resetBuffer();
+            window.buffer.writeString('A'.repeat(100)); // Should wrap multiple times
+            renderBuffer();
+            console.log('✅ Test 2 complete');
+        };
+
+        window.testWideChars = function() {
+            console.log('🧪 Running Test 3: Wide Characters');
+            resetBuffer();
+            window.buffer.writeString('Regular: ABC');
+            window.buffer.moveCursorTo(0, 2);
+            window.buffer.writeString('Chinese: 中文测试');
+            window.buffer.moveCursorTo(0, 4);
+            window.buffer.writeString('Japanese: 日本語');
+            window.buffer.moveCursorTo(0, 6);
+            window.buffer.writeString('Emoji: 😀🎉🚀💻');
+            window.buffer.moveCursorTo(0, 8);
+            window.buffer.writeString('Mixed: AB中C😀D');
+            renderBuffer();
+            console.log('✅ Test 3 complete - Check that wide chars take 2 cells!');
+        };
+
+        window.testScrollRegionDemo = function() {
+            console.log('🧪 Running Test 4: Scroll Region Demo');
+            resetBuffer();
+            
+            // Draw top border
+            window.buffer.moveCursorTo(0, 0);
+            window.buffer.setStyle({ fg: { type: 'palette', index: 6 } });
+            window.buffer.writeString('═'.repeat(80));
+            
+            // Draw title
+            window.buffer.resetStyle();
+            window.buffer.moveCursorTo(0, 1);
+            window.buffer.setStyle({ bold: true, fg: { type: 'palette', index: 3 } });
+            window.buffer.writeString('SCROLL REGION DEMO - Lines 5-18 will scroll');
+            
+            // Draw separator
+            window.buffer.resetStyle();
+            window.buffer.moveCursorTo(0, 3);
+            window.buffer.setStyle({ fg: { type: 'palette', index: 6 } });
+            window.buffer.writeString('─'.repeat(80));
+            
+            // Set scroll region (lines 5-18)
+            window.buffer.setScrollRegion(5, 18);
+            
+            // Fill scroll region
+            window.buffer.resetStyle();
+            for (let i = 0; i < 20; i++) {
+                window.buffer.moveCursorTo(0, 5 + i);
+                window.buffer.writeString(`Scrolling content line ${i} - watch lines 5-18!`);
+            }
+            
+            // Draw bottom border (outside region)
+            window.buffer.clearScrollRegion();
+            window.buffer.moveCursorTo(0, 20);
+            window.buffer.setStyle({ fg: { type: 'palette', index: 6 } });
+            window.buffer.writeString('─'.repeat(80));
+            window.buffer.moveCursorTo(0, 21);
+            window.buffer.resetStyle();
+            window.buffer.writeString('Status bar - this line never scrolls!');
+            
+            renderBuffer();
+            console.log('✅ Test 4 complete - Check that only lines 5-18 scrolled!');
+        };
+
+        window.testVimLike = function() {
+            console.log('🧪 Running Test 5: Vim-like Layout');
+            resetBuffer();
+            
+            // Title bar
+            window.buffer.setStyle({ inverse: true });
+            window.buffer.writeString(' VIM.TXT                                                                ');
+            
+            // Content area with line numbers
+            window.buffer.resetStyle();
+            for (let i = 1; i <= 20; i++) {
+                window.buffer.moveCursorTo(0, i);
+                window.buffer.setStyle({ fg: { type: 'palette', index: 3 } });
+                window.buffer.writeString(`${i}`.padStart(3, ' ') + ' ');
+                window.buffer.resetStyle();
+                window.buffer.writeString(`This is line ${i} of the file`);
+            }
+            
+            // Status bar
+            window.buffer.moveCursorTo(0, 22);
+            window.buffer.setStyle({ inverse: true });
+            window.buffer.writeString(' INSERT                                    vim-demo.txt | Line 1, Col 1 ');
+            
+            // Command line
+            window.buffer.resetStyle();
+            window.buffer.moveCursorTo(0, 23);
+            window.buffer.writeString(':');
+            
+            renderBuffer();
+            console.log('✅ Test 5 complete - Check the vim-like layout!');
+        };
+
+        window.testStressTest = function() {
+            console.log('🧪 Running Test 6: Stress Test');
+            resetBuffer();
+            
+            // Write lots of text with different styles
+            for (let i = 0; i < 100; i++) {
+                const colorIndex = i % 8;
+                window.buffer.setStyle({ 
+                    fg: { type: 'palette', index: colorIndex },
+                    bold: i % 3 === 0,
+                    italic: i % 5 === 0
+                });
+                window.buffer.writeString(`Line ${i} `);
+            }
+            
+            renderBuffer();
+            console.log('✅ Test 6 complete - Check scrollback counter increased!');
+        };
+
+        // Initial render
+        try {
+            renderBuffer();
+            
+            // Update status banner
+            document.getElementById('status-banner').innerHTML = `
+                <strong>✅ Ready!</strong> Task 2: Screen Buffer Testing<br>
+                Click the test scenario buttons below or use interactive controls.
+                Check browser console (F12) for detailed logs.
+            `;
+            document.getElementById('status-banner').style.background = '#1e4d2b';
+            document.getElementById('status-banner').style.borderLeft = '4px solid #4ec9b0';
+            
+            console.log('✅ Buffer demo loaded successfully!');
+            console.log('📊 Buffer stats:', {
+                dimensions: window.buffer.getDimensions(),
+                cursor: window.buffer.getCursor(),
+                scrollback: window.buffer.getScrollback().length
+            });
+            console.log('💡 Try the test scenarios or use window.buffer API directly');
+            console.log('🧪 Available test functions:', [
+                'testBasicWriting()',
+                'testWrapping()',
+                'testWideChars()',
+                'testScrollRegionDemo()',
+                'testVimLike()',
+                'testStressTest()'
+            ]);
+        } catch (e) {
+            console.error('❌ Render failed:', e);
+            document.getElementById('status-banner').innerHTML = `
+                <strong>❌ Error!</strong><br>
+                Failed to initialize: ${e.message}
+            `;
+            document.getElementById('status-banner').style.background = '#4d1e1e';
+            document.getElementById('terminal').innerHTML = `
+                <div style="color: #f00; padding: 20px;">
+                    <strong>Render Error:</strong> ${e.message}
+                    <br><br>Check console for details.
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
