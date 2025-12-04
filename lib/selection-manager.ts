@@ -717,20 +717,19 @@ export class SelectionManager {
       // Key insight: we need to EXTEND the selection, not reset it to viewport edge
       if (this.selectionEnd) {
         const dims = this.wasmTerm.getDimensions();
-        const viewportY = this.getViewportY();
         if (this.autoScrollDirection < 0) {
           // Scrolling up - extend selection upward (decrease absoluteRow)
           // Set to top of viewport, but only if it extends the selection
-          const topOfViewport = viewportY;
-          if (topOfViewport < this.selectionEnd.absoluteRow) {
-            this.selectionEnd = { col: 0, absoluteRow: topOfViewport };
+          const topAbsoluteRow = this.viewportRowToAbsolute(0);
+          if (topAbsoluteRow < this.selectionEnd.absoluteRow) {
+            this.selectionEnd = { col: 0, absoluteRow: topAbsoluteRow };
           }
         } else {
           // Scrolling down - extend selection downward (increase absoluteRow)
           // Set to bottom of viewport, but only if it extends the selection
-          const bottomOfViewport = viewportY + dims.rows - 1;
-          if (bottomOfViewport > this.selectionEnd.absoluteRow) {
-            this.selectionEnd = { col: dims.cols - 1, absoluteRow: bottomOfViewport };
+          const bottomAbsoluteRow = this.viewportRowToAbsolute(dims.rows - 1);
+          if (bottomAbsoluteRow > this.selectionEnd.absoluteRow) {
+            this.selectionEnd = { col: dims.cols - 1, absoluteRow: bottomAbsoluteRow };
           }
         }
       }
