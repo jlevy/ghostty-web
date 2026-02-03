@@ -1,11 +1,10 @@
 node_modules/
-dist/
 .DS_Store
 *.log
 .vite/
 
-# WASM build output (built locally and in CI)
-ghostty-vt.wasm
-
 # Reference codebases for research
 attic/
+
+# Note: dist/ and ghostty-vt.wasm are committed on the kerm branch
+# so the package can be installed directly from GitHub
