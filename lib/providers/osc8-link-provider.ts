@@ -53,9 +53,8 @@ export class OSC8LinkProvider implements ILinkProvider {
       // Find the full extent of this link (may span multiple lines)
       const range = this.findLinkRange(hyperlinkId, y, x);
 
-      // Get the URI from WASM
-      if (!this.terminal.wasmTerm) continue;
-      const uri = this.terminal.wasmTerm.getHyperlinkUri(hyperlinkId);
+      // Get the URI from the terminal's hyperlink registry
+      const uri = this.terminal.getHyperlinkUri?.(hyperlinkId);
 
       if (uri) {
         links.push({
@@ -210,7 +209,6 @@ export interface ITerminalForOSC8Provider {
         | undefined;
     };
   };
-  wasmTerm?: {
-    getHyperlinkUri(id: number): string | null;
-  };
+  /** Get the URI for a hyperlink by its numeric ID (optional for compatibility) */
+  getHyperlinkUri?(id: number): string | null;
 }

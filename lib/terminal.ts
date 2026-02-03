@@ -19,6 +19,7 @@ import { BufferNamespace } from './buffer';
 import { EventEmitter } from './event-emitter';
 import type { Ghostty, GhosttyCell, GhosttyTerminal, GhosttyTerminalConfig } from './ghostty';
 import { getGhostty } from './index';
+import { HyperlinkRegistry, parseOsc8Sequences } from './hyperlink-registry';
 import { InputHandler, type MouseTrackingConfig } from './input-handler';
 import type {
   IBufferNamespace,
@@ -75,6 +76,9 @@ export class Terminal implements ITerminalCore {
   private currentHoveredLink?: ILink;
   private mouseMoveThrottleTimeout?: number;
   private pendingMouseMove?: MouseEvent;
+
+  // Hyperlink registry (tracks OSC 8 URIs since WASM doesn't expose them)
+  private hyperlinkRegistry = new HyperlinkRegistry();
 
   // Event emitters
   private dataEmitter = new EventEmitter<string>();
@@ -552,6 +556,10 @@ export class Terminal implements ITerminalCore {
     // preserve selection when new data arrives. Selection is cleared by user actions
     // like clicking or typing, not by incoming data.
 
+    // Parse OSC 8 hyperlinks from the data stream before WASM processing
+    // This is needed because WASM assigns hyperlink_id to cells but doesn't expose URIs
+    parseOsc8Sequences(data, this.hyperlinkRegistry);
+
     // Write directly to WASM terminal (handles VT parsing internally)
     this.wasmTerm!.write(data);
 
@@ -798,6 +806,27 @@ export class Terminal implements ITerminalCore {
    */
   public selectLines(start: number, end: number): void {
     this.selectionManager?.selectLines(start, end);
+  }
+
+  /**
+   * Get the URI for a hyperlink by its numeric ID
+   *
+   * OSC 8 hyperlinks are parsed from the terminal data stream and stored
+   * in a registry. This method looks up the URI for a given hyperlink_id
+   * from a cell.
+   *
+   * @param id The numeric hyperlink_id from a cell
+   * @returns The URI string or null if not found
+   */
+  public getHyperlinkUri(id: number): string | null {
+    return this.hyperlinkRegistry.getUri(id);
+  }
+
+  /**
+   * Clear the hyperlink registry (call on terminal reset)
+   */
+  public clearHyperlinkRegistry(): void {
+    this.hyperlinkRegistry.clear();
   }
 
   /**
