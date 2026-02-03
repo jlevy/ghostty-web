@@ -6,3 +6,6 @@ dist/
 
 # WASM build output (built locally and in CI)
 ghostty-vt.wasm
+
+# Reference codebases for research
+attic/
