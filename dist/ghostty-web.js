@@ -1,15 +1,15 @@
-var H = /* @__PURE__ */ ((B) => (B[B.CURSOR_KEY_APPLICATION = 0] = "CURSOR_KEY_APPLICATION", B[B.KEYPAD_KEY_APPLICATION = 1] = "KEYPAD_KEY_APPLICATION", B[B.IGNORE_KEYPAD_WITH_NUMLOCK = 2] = "IGNORE_KEYPAD_WITH_NUMLOCK", B[B.ALT_ESC_PREFIX = 3] = "ALT_ESC_PREFIX", B[B.MODIFY_OTHER_KEYS_STATE_2 = 4] = "MODIFY_OTHER_KEYS_STATE_2", B[B.KITTY_KEYBOARD_FLAGS = 5] = "KITTY_KEYBOARD_FLAGS", B))(H || {}), u = /* @__PURE__ */ ((B) => (B[B.RELEASE = 0] = "RELEASE", B[B.PRESS = 1] = "PRESS", B[B.REPEAT = 2] = "REPEAT", B))(u || {}), i = /* @__PURE__ */ ((B) => (B[B.UNIDENTIFIED = 0] = "UNIDENTIFIED", B[B.GRAVE = 1] = "GRAVE", B[B.BACKSLASH = 2] = "BACKSLASH", B[B.BRACKET_LEFT = 3] = "BRACKET_LEFT", B[B.BRACKET_RIGHT = 4] = "BRACKET_RIGHT", B[B.COMMA = 5] = "COMMA", B[B.ZERO = 6] = "ZERO", B[B.ONE = 7] = "ONE", B[B.TWO = 8] = "TWO", B[B.THREE = 9] = "THREE", B[B.FOUR = 10] = "FOUR", B[B.FIVE = 11] = "FIVE", B[B.SIX = 12] = "SIX", B[B.SEVEN = 13] = "SEVEN", B[B.EIGHT = 14] = "EIGHT", B[B.NINE = 15] = "NINE", B[B.EQUAL = 16] = "EQUAL", B[B.INTL_BACKSLASH = 17] = "INTL_BACKSLASH", B[B.INTL_RO = 18] = "INTL_RO", B[B.INTL_YEN = 19] = "INTL_YEN", B[B.A = 20] = "A", B[B.B = 21] = "B", B[B.C = 22] = "C", B[B.D = 23] = "D", B[B.E = 24] = "E", B[B.F = 25] = "F", B[B.G = 26] = "G", B[B.H = 27] = "H", B[B.I = 28] = "I", B[B.J = 29] = "J", B[B.K = 30] = "K", B[B.L = 31] = "L", B[B.M = 32] = "M", B[B.N = 33] = "N", B[B.O = 34] = "O", B[B.P = 35] = "P", B[B.Q = 36] = "Q", B[B.R = 37] = "R", B[B.S = 38] = "S", B[B.T = 39] = "T", B[B.U = 40] = "U", B[B.V = 41] = "V", B[B.W = 42] = "W", B[B.X = 43] = "X", B[B.Y = 44] = "Y", B[B.Z = 45] = "Z", B[B.MINUS = 46] = "MINUS", B[B.PERIOD = 47] = "PERIOD", B[B.QUOTE = 48] = "QUOTE", B[B.SEMICOLON = 49] = "SEMICOLON", B[B.SLASH = 50] = "SLASH", B[B.ALT_LEFT = 51] = "ALT_LEFT", B[B.ALT_RIGHT = 52] = "ALT_RIGHT", B[B.BACKSPACE = 53] = "BACKSPACE", B[B.CAPS_LOCK = 54] = "CAPS_LOCK", B[B.CONTEXT_MENU = 55] = "CONTEXT_MENU", B[B.CONTROL_LEFT = 56] = "CONTROL_LEFT", B[B.CONTROL_RIGHT = 57] = "CONTROL_RIGHT", B[B.ENTER = 58] = "ENTER", B[B.META_LEFT = 59] = "META_LEFT", B[B.META_RIGHT = 60] = "META_RIGHT", B[B.SHIFT_LEFT = 61] = "SHIFT_LEFT", B[B.SHIFT_RIGHT = 62] = "SHIFT_RIGHT", B[B.SPACE = 63] = "SPACE", B[B.TAB = 64] = "TAB", B[B.CONVERT = 65] = "CONVERT", B[B.KANA_MODE = 66] = "KANA_MODE", B[B.NON_CONVERT = 67] = "NON_CONVERT", B[B.DELETE = 68] = "DELETE", B[B.END = 69] = "END", B[B.HELP = 70] = "HELP", B[B.HOME = 71] = "HOME", B[B.INSERT = 72] = "INSERT", B[B.PAGE_DOWN = 73] = "PAGE_DOWN", B[B.PAGE_UP = 74] = "PAGE_UP", B[B.DOWN = 75] = "DOWN", B[B.LEFT = 76] = "LEFT", B[B.RIGHT = 77] = "RIGHT", B[B.UP = 78] = "UP", B[B.NUM_LOCK = 79] = "NUM_LOCK", B[B.KP_0 = 80] = "KP_0", B[B.KP_1 = 81] = "KP_1", B[B.KP_2 = 82] = "KP_2", B[B.KP_3 = 83] = "KP_3", B[B.KP_4 = 84] = "KP_4", B[B.KP_5 = 85] = "KP_5", B[B.KP_6 = 86] = "KP_6", B[B.KP_7 = 87] = "KP_7", B[B.KP_8 = 88] = "KP_8", B[B.KP_9 = 89] = "KP_9", B[B.KP_PLUS = 90] = "KP_PLUS", B[B.KP_BACKSPACE = 91] = "KP_BACKSPACE", B[B.KP_CLEAR = 92] = "KP_CLEAR", B[B.KP_CLEAR_ENTRY = 93] = "KP_CLEAR_ENTRY", B[B.KP_COMMA = 94] = "KP_COMMA", B[B.KP_PERIOD = 95] = "KP_PERIOD", B[B.KP_DIVIDE = 96] = "KP_DIVIDE", B[B.KP_ENTER = 97] = "KP_ENTER", B[B.KP_EQUAL = 98] = "KP_EQUAL", B[B.KP_MEMORY_ADD = 99] = "KP_MEMORY_ADD", B[B.KP_MEMORY_CLEAR = 100] = "KP_MEMORY_CLEAR", B[B.KP_MEMORY_RECALL = 101] = "KP_MEMORY_RECALL", B[B.KP_MEMORY_STORE = 102] = "KP_MEMORY_STORE", B[B.KP_MEMORY_SUBTRACT = 103] = "KP_MEMORY_SUBTRACT", B[B.KP_MULTIPLY = 104] = "KP_MULTIPLY", B[B.KP_PAREN_LEFT = 105] = "KP_PAREN_LEFT", B[B.KP_PAREN_RIGHT = 106] = "KP_PAREN_RIGHT", B[B.KP_MINUS = 107] = "KP_MINUS", B[B.KP_SEPARATOR = 108] = "KP_SEPARATOR", B[B.NUMPAD_UP = 109] = "NUMPAD_UP", B[B.NUMPAD_DOWN = 110] = "NUMPAD_DOWN", B[B.NUMPAD_RIGHT = 111] = "NUMPAD_RIGHT", B[B.NUMPAD_LEFT = 112] = "NUMPAD_LEFT", B[B.NUMPAD_BEGIN = 113] = "NUMPAD_BEGIN", B[B.NUMPAD_HOME = 114] = "NUMPAD_HOME", B[B.NUMPAD_END = 115] = "NUMPAD_END", B[B.NUMPAD_INSERT = 116] = "NUMPAD_INSERT", B[B.NUMPAD_DELETE = 117] = "NUMPAD_DELETE", B[B.NUMPAD_PAGE_UP = 118] = "NUMPAD_PAGE_UP", B[B.NUMPAD_PAGE_DOWN = 119] = "NUMPAD_PAGE_DOWN", B[B.ESCAPE = 120] = "ESCAPE", B[B.F1 = 121] = "F1", B[B.F2 = 122] = "F2", B[B.F3 = 123] = "F3", B[B.F4 = 124] = "F4", B[B.F5 = 125] = "F5", B[B.F6 = 126] = "F6", B[B.F7 = 127] = "F7", B[B.F8 = 128] = "F8", B[B.F9 = 129] = "F9", B[B.F10 = 130] = "F10", B[B.F11 = 131] = "F11", B[B.F12 = 132] = "F12", B[B.F13 = 133] = "F13", B[B.F14 = 134] = "F14", B[B.F15 = 135] = "F15", B[B.F16 = 136] = "F16", B[B.F17 = 137] = "F17", B[B.F18 = 138] = "F18", B[B.F19 = 139] = "F19", B[B.F20 = 140] = "F20", B[B.F21 = 141] = "F21", B[B.F22 = 142] = "F22", B[B.F23 = 143] = "F23", B[B.F24 = 144] = "F24", B[B.F25 = 145] = "F25", B[B.FN_LOCK = 146] = "FN_LOCK", B[B.PRINT_SCREEN = 147] = "PRINT_SCREEN", B[B.SCROLL_LOCK = 148] = "SCROLL_LOCK", B[B.PAUSE = 149] = "PAUSE", B[B.BROWSER_BACK = 150] = "BROWSER_BACK", B[B.BROWSER_FAVORITES = 151] = "BROWSER_FAVORITES", B[B.BROWSER_FORWARD = 152] = "BROWSER_FORWARD", B[B.BROWSER_HOME = 153] = "BROWSER_HOME", B[B.BROWSER_REFRESH = 154] = "BROWSER_REFRESH", B[B.BROWSER_SEARCH = 155] = "BROWSER_SEARCH", B[B.BROWSER_STOP = 156] = "BROWSER_STOP", B[B.EJECT = 157] = "EJECT", B[B.LAUNCH_APP_1 = 158] = "LAUNCH_APP_1", B[B.LAUNCH_APP_2 = 159] = "LAUNCH_APP_2", B[B.LAUNCH_MAIL = 160] = "LAUNCH_MAIL", B[B.MEDIA_PLAY_PAUSE = 161] = "MEDIA_PLAY_PAUSE", B[B.MEDIA_SELECT = 162] = "MEDIA_SELECT", B[B.MEDIA_STOP = 163] = "MEDIA_STOP", B[B.MEDIA_TRACK_NEXT = 164] = "MEDIA_TRACK_NEXT", B[B.MEDIA_TRACK_PREVIOUS = 165] = "MEDIA_TRACK_PREVIOUS", B[B.POWER = 166] = "POWER", B[B.SLEEP = 167] = "SLEEP", B[B.AUDIO_VOLUME_DOWN = 168] = "AUDIO_VOLUME_DOWN", B[B.AUDIO_VOLUME_MUTE = 169] = "AUDIO_VOLUME_MUTE", B[B.AUDIO_VOLUME_UP = 170] = "AUDIO_VOLUME_UP", B[B.WAKE_UP = 171] = "WAKE_UP", B[B.COPY = 172] = "COPY", B[B.CUT = 173] = "CUT", B[B.PASTE = 174] = "PASTE", B))(i || {}), K = /* @__PURE__ */ ((B) => (B[B.NONE = 0] = "NONE", B[B.SHIFT = 1] = "SHIFT", B[B.CTRL = 2] = "CTRL", B[B.ALT = 4] = "ALT", B[B.SUPER = 8] = "SUPER", B[B.CAPSLOCK = 16] = "CAPSLOCK", B[B.NUMLOCK = 32] = "NUMLOCK", B))(K || {}), S = /* @__PURE__ */ ((B) => (B[B.NONE = 0] = "NONE", B[B.PARTIAL = 1] = "PARTIAL", B[B.FULL = 2] = "FULL", B))(S || {});
-const m = 80;
+var H = /* @__PURE__ */ ((B) => (B[B.CURSOR_KEY_APPLICATION = 0] = "CURSOR_KEY_APPLICATION", B[B.KEYPAD_KEY_APPLICATION = 1] = "KEYPAD_KEY_APPLICATION", B[B.IGNORE_KEYPAD_WITH_NUMLOCK = 2] = "IGNORE_KEYPAD_WITH_NUMLOCK", B[B.ALT_ESC_PREFIX = 3] = "ALT_ESC_PREFIX", B[B.MODIFY_OTHER_KEYS_STATE_2 = 4] = "MODIFY_OTHER_KEYS_STATE_2", B[B.KITTY_KEYBOARD_FLAGS = 5] = "KITTY_KEYBOARD_FLAGS", B))(H || {}), V = /* @__PURE__ */ ((B) => (B[B.RELEASE = 0] = "RELEASE", B[B.PRESS = 1] = "PRESS", B[B.REPEAT = 2] = "REPEAT", B))(V || {}), i = /* @__PURE__ */ ((B) => (B[B.UNIDENTIFIED = 0] = "UNIDENTIFIED", B[B.GRAVE = 1] = "GRAVE", B[B.BACKSLASH = 2] = "BACKSLASH", B[B.BRACKET_LEFT = 3] = "BRACKET_LEFT", B[B.BRACKET_RIGHT = 4] = "BRACKET_RIGHT", B[B.COMMA = 5] = "COMMA", B[B.ZERO = 6] = "ZERO", B[B.ONE = 7] = "ONE", B[B.TWO = 8] = "TWO", B[B.THREE = 9] = "THREE", B[B.FOUR = 10] = "FOUR", B[B.FIVE = 11] = "FIVE", B[B.SIX = 12] = "SIX", B[B.SEVEN = 13] = "SEVEN", B[B.EIGHT = 14] = "EIGHT", B[B.NINE = 15] = "NINE", B[B.EQUAL = 16] = "EQUAL", B[B.INTL_BACKSLASH = 17] = "INTL_BACKSLASH", B[B.INTL_RO = 18] = "INTL_RO", B[B.INTL_YEN = 19] = "INTL_YEN", B[B.A = 20] = "A", B[B.B = 21] = "B", B[B.C = 22] = "C", B[B.D = 23] = "D", B[B.E = 24] = "E", B[B.F = 25] = "F", B[B.G = 26] = "G", B[B.H = 27] = "H", B[B.I = 28] = "I", B[B.J = 29] = "J", B[B.K = 30] = "K", B[B.L = 31] = "L", B[B.M = 32] = "M", B[B.N = 33] = "N", B[B.O = 34] = "O", B[B.P = 35] = "P", B[B.Q = 36] = "Q", B[B.R = 37] = "R", B[B.S = 38] = "S", B[B.T = 39] = "T", B[B.U = 40] = "U", B[B.V = 41] = "V", B[B.W = 42] = "W", B[B.X = 43] = "X", B[B.Y = 44] = "Y", B[B.Z = 45] = "Z", B[B.MINUS = 46] = "MINUS", B[B.PERIOD = 47] = "PERIOD", B[B.QUOTE = 48] = "QUOTE", B[B.SEMICOLON = 49] = "SEMICOLON", B[B.SLASH = 50] = "SLASH", B[B.ALT_LEFT = 51] = "ALT_LEFT", B[B.ALT_RIGHT = 52] = "ALT_RIGHT", B[B.BACKSPACE = 53] = "BACKSPACE", B[B.CAPS_LOCK = 54] = "CAPS_LOCK", B[B.CONTEXT_MENU = 55] = "CONTEXT_MENU", B[B.CONTROL_LEFT = 56] = "CONTROL_LEFT", B[B.CONTROL_RIGHT = 57] = "CONTROL_RIGHT", B[B.ENTER = 58] = "ENTER", B[B.META_LEFT = 59] = "META_LEFT", B[B.META_RIGHT = 60] = "META_RIGHT", B[B.SHIFT_LEFT = 61] = "SHIFT_LEFT", B[B.SHIFT_RIGHT = 62] = "SHIFT_RIGHT", B[B.SPACE = 63] = "SPACE", B[B.TAB = 64] = "TAB", B[B.CONVERT = 65] = "CONVERT", B[B.KANA_MODE = 66] = "KANA_MODE", B[B.NON_CONVERT = 67] = "NON_CONVERT", B[B.DELETE = 68] = "DELETE", B[B.END = 69] = "END", B[B.HELP = 70] = "HELP", B[B.HOME = 71] = "HOME", B[B.INSERT = 72] = "INSERT", B[B.PAGE_DOWN = 73] = "PAGE_DOWN", B[B.PAGE_UP = 74] = "PAGE_UP", B[B.DOWN = 75] = "DOWN", B[B.LEFT = 76] = "LEFT", B[B.RIGHT = 77] = "RIGHT", B[B.UP = 78] = "UP", B[B.NUM_LOCK = 79] = "NUM_LOCK", B[B.KP_0 = 80] = "KP_0", B[B.KP_1 = 81] = "KP_1", B[B.KP_2 = 82] = "KP_2", B[B.KP_3 = 83] = "KP_3", B[B.KP_4 = 84] = "KP_4", B[B.KP_5 = 85] = "KP_5", B[B.KP_6 = 86] = "KP_6", B[B.KP_7 = 87] = "KP_7", B[B.KP_8 = 88] = "KP_8", B[B.KP_9 = 89] = "KP_9", B[B.KP_PLUS = 90] = "KP_PLUS", B[B.KP_BACKSPACE = 91] = "KP_BACKSPACE", B[B.KP_CLEAR = 92] = "KP_CLEAR", B[B.KP_CLEAR_ENTRY = 93] = "KP_CLEAR_ENTRY", B[B.KP_COMMA = 94] = "KP_COMMA", B[B.KP_PERIOD = 95] = "KP_PERIOD", B[B.KP_DIVIDE = 96] = "KP_DIVIDE", B[B.KP_ENTER = 97] = "KP_ENTER", B[B.KP_EQUAL = 98] = "KP_EQUAL", B[B.KP_MEMORY_ADD = 99] = "KP_MEMORY_ADD", B[B.KP_MEMORY_CLEAR = 100] = "KP_MEMORY_CLEAR", B[B.KP_MEMORY_RECALL = 101] = "KP_MEMORY_RECALL", B[B.KP_MEMORY_STORE = 102] = "KP_MEMORY_STORE", B[B.KP_MEMORY_SUBTRACT = 103] = "KP_MEMORY_SUBTRACT", B[B.KP_MULTIPLY = 104] = "KP_MULTIPLY", B[B.KP_PAREN_LEFT = 105] = "KP_PAREN_LEFT", B[B.KP_PAREN_RIGHT = 106] = "KP_PAREN_RIGHT", B[B.KP_MINUS = 107] = "KP_MINUS", B[B.KP_SEPARATOR = 108] = "KP_SEPARATOR", B[B.NUMPAD_UP = 109] = "NUMPAD_UP", B[B.NUMPAD_DOWN = 110] = "NUMPAD_DOWN", B[B.NUMPAD_RIGHT = 111] = "NUMPAD_RIGHT", B[B.NUMPAD_LEFT = 112] = "NUMPAD_LEFT", B[B.NUMPAD_BEGIN = 113] = "NUMPAD_BEGIN", B[B.NUMPAD_HOME = 114] = "NUMPAD_HOME", B[B.NUMPAD_END = 115] = "NUMPAD_END", B[B.NUMPAD_INSERT = 116] = "NUMPAD_INSERT", B[B.NUMPAD_DELETE = 117] = "NUMPAD_DELETE", B[B.NUMPAD_PAGE_UP = 118] = "NUMPAD_PAGE_UP", B[B.NUMPAD_PAGE_DOWN = 119] = "NUMPAD_PAGE_DOWN", B[B.ESCAPE = 120] = "ESCAPE", B[B.F1 = 121] = "F1", B[B.F2 = 122] = "F2", B[B.F3 = 123] = "F3", B[B.F4 = 124] = "F4", B[B.F5 = 125] = "F5", B[B.F6 = 126] = "F6", B[B.F7 = 127] = "F7", B[B.F8 = 128] = "F8", B[B.F9 = 129] = "F9", B[B.F10 = 130] = "F10", B[B.F11 = 131] = "F11", B[B.F12 = 132] = "F12", B[B.F13 = 133] = "F13", B[B.F14 = 134] = "F14", B[B.F15 = 135] = "F15", B[B.F16 = 136] = "F16", B[B.F17 = 137] = "F17", B[B.F18 = 138] = "F18", B[B.F19 = 139] = "F19", B[B.F20 = 140] = "F20", B[B.F21 = 141] = "F21", B[B.F22 = 142] = "F22", B[B.F23 = 143] = "F23", B[B.F24 = 144] = "F24", B[B.F25 = 145] = "F25", B[B.FN_LOCK = 146] = "FN_LOCK", B[B.PRINT_SCREEN = 147] = "PRINT_SCREEN", B[B.SCROLL_LOCK = 148] = "SCROLL_LOCK", B[B.PAUSE = 149] = "PAUSE", B[B.BROWSER_BACK = 150] = "BROWSER_BACK", B[B.BROWSER_FAVORITES = 151] = "BROWSER_FAVORITES", B[B.BROWSER_FORWARD = 152] = "BROWSER_FORWARD", B[B.BROWSER_HOME = 153] = "BROWSER_HOME", B[B.BROWSER_REFRESH = 154] = "BROWSER_REFRESH", B[B.BROWSER_SEARCH = 155] = "BROWSER_SEARCH", B[B.BROWSER_STOP = 156] = "BROWSER_STOP", B[B.EJECT = 157] = "EJECT", B[B.LAUNCH_APP_1 = 158] = "LAUNCH_APP_1", B[B.LAUNCH_APP_2 = 159] = "LAUNCH_APP_2", B[B.LAUNCH_MAIL = 160] = "LAUNCH_MAIL", B[B.MEDIA_PLAY_PAUSE = 161] = "MEDIA_PLAY_PAUSE", B[B.MEDIA_SELECT = 162] = "MEDIA_SELECT", B[B.MEDIA_STOP = 163] = "MEDIA_STOP", B[B.MEDIA_TRACK_NEXT = 164] = "MEDIA_TRACK_NEXT", B[B.MEDIA_TRACK_PREVIOUS = 165] = "MEDIA_TRACK_PREVIOUS", B[B.POWER = 166] = "POWER", B[B.SLEEP = 167] = "SLEEP", B[B.AUDIO_VOLUME_DOWN = 168] = "AUDIO_VOLUME_DOWN", B[B.AUDIO_VOLUME_MUTE = 169] = "AUDIO_VOLUME_MUTE", B[B.AUDIO_VOLUME_UP = 170] = "AUDIO_VOLUME_UP", B[B.WAKE_UP = 171] = "WAKE_UP", B[B.COPY = 172] = "COPY", B[B.CUT = 173] = "CUT", B[B.PASTE = 174] = "PASTE", B))(i || {}), r = /* @__PURE__ */ ((B) => (B[B.NONE = 0] = "NONE", B[B.SHIFT = 1] = "SHIFT", B[B.CTRL = 2] = "CTRL", B[B.ALT = 4] = "ALT", B[B.SUPER = 8] = "SUPER", B[B.CAPSLOCK = 16] = "CAPSLOCK", B[B.NUMLOCK = 32] = "NUMLOCK", B))(r || {}), S = /* @__PURE__ */ ((B) => (B[B.NONE = 0] = "NONE", B[B.PARTIAL = 1] = "PARTIAL", B[B.FULL = 2] = "FULL", B))(S || {});
+const b = 80;
 var G = /* @__PURE__ */ ((B) => (B[B.BOLD = 1] = "BOLD", B[B.ITALIC = 2] = "ITALIC", B[B.UNDERLINE = 4] = "UNDERLINE", B[B.STRIKETHROUGH = 8] = "STRIKETHROUGH", B[B.INVERSE = 16] = "INVERSE", B[B.INVISIBLE = 32] = "INVISIBLE", B[B.BLINK = 64] = "BLINK", B[B.FAINT = 128] = "FAINT", B))(G || {});
 class Y {
   constructor(A) {
     this.exports = A.exports, this.memory = this.exports.memory;
   }
   createKeyEncoder() {
-    return new W(this.exports);
+    return new P(this.exports);
   }
   createTerminal(A = 80, Q = 24, g) {
-    return new Z(this.exports, this.memory, A, Q, g);
+    return new v(this.exports, this.memory, A, Q, g);
   }
   static async load(A) {
     if (A)
@@ -67,7 +67,7 @@ class Y {
     return new Y(E);
   }
 }
-class W {
+class P {
   constructor(A) {
     this.encoder = 0, this.exports = A;
     const Q = this.exports.ghostty_wasm_alloc_opaque(), g = this.exports.ghostty_key_encoder_new(0, Q);
@@ -108,11 +108,11 @@ class W {
     this.encoder && (this.exports.ghostty_key_encoder_free(this.encoder), this.encoder = 0);
   }
 }
-const z = class r {
+const W = class K {
   constructor(A, Q, g = 80, E = 24, C) {
     var I;
     if (this.viewportBufferPtr = 0, this.viewportBufferSize = 0, this.cellPool = [], this.graphemeBuffer = null, this.graphemeBufferPtr = 0, this.exports = A, this.memory = Q, this._cols = g, this._rows = E, C) {
-      const D = this.exports.ghostty_wasm_alloc_u8_array(m);
+      const D = this.exports.ghostty_wasm_alloc_u8_array(b);
       if (D === 0)
         throw new Error("Failed to allocate config (out of memory)");
       try {
@@ -123,7 +123,7 @@ const z = class r {
           o.setUint32(w, ((I = C.palette) == null ? void 0 : I[s]) ?? 0, !0), w += 4;
         this.handle = this.exports.ghostty_terminal_new_with_config(g, E, D);
       } finally {
-        this.exports.ghostty_wasm_free_u8_array(D, m);
+        this.exports.ghostty_wasm_free_u8_array(D, b);
       }
     } else
       this.handle = this.exports.ghostty_terminal_new(g, E);
@@ -223,7 +223,7 @@ const z = class r {
    * Returns a reusable cell array (zero allocation after warmup).
    */
   getViewport() {
-    const A = this._cols * this._rows, Q = A * r.CELL_SIZE;
+    const A = this._cols * this._rows, Q = A * K.CELL_SIZE;
     return (!this.viewportBufferPtr || this.viewportBufferSize < Q) && (this.viewportBufferPtr && this.exports.ghostty_wasm_free_u8_array(this.viewportBufferPtr, this.viewportBufferSize), this.viewportBufferPtr = this.exports.ghostty_wasm_alloc_u8_array(Q), this.viewportBufferSize = Q), this.exports.ghostty_render_state_get_viewport(
       this.handle,
       this.viewportBufferPtr,
@@ -292,7 +292,7 @@ const z = class r {
    * @param offset 0 = oldest line, (length-1) = most recent scrollback line
    */
   getScrollbackLine(A) {
-    const Q = this._cols * r.CELL_SIZE;
+    const Q = this._cols * K.CELL_SIZE;
     (!this.viewportBufferPtr || this.viewportBufferSize < Q) && (this.viewportBufferPtr && this.exports.ghostty_wasm_free_u8_array(this.viewportBufferPtr, this.viewportBufferSize), this.viewportBufferPtr = this.exports.ghostty_wasm_alloc_u8_array(Q), this.viewportBufferSize = Q), this.update();
     const g = this.exports.ghostty_terminal_get_scrollback_line(
       this.handle,
@@ -302,9 +302,9 @@ const z = class r {
     );
     if (g < 0)
       return null;
-    const E = [], C = this.memory.buffer, I = new Uint8Array(C, this.viewportBufferPtr, g * r.CELL_SIZE), D = new DataView(C, this.viewportBufferPtr, g * r.CELL_SIZE);
+    const E = [], C = this.memory.buffer, I = new Uint8Array(C, this.viewportBufferPtr, g * K.CELL_SIZE), D = new DataView(C, this.viewportBufferPtr, g * K.CELL_SIZE);
     for (let o = 0; o < g; o++) {
-      const w = o * r.CELL_SIZE;
+      const w = o * K.CELL_SIZE;
       E.push({
         codepoint: D.getUint32(w, !0),
         fg_r: I[w + 4],
@@ -388,9 +388,9 @@ const z = class r {
         });
   }
   parseCellsIntoPool(A, Q) {
-    const g = this.memory.buffer, E = new Uint8Array(g, A, Q * r.CELL_SIZE), C = new DataView(g, A, Q * r.CELL_SIZE);
+    const g = this.memory.buffer, E = new Uint8Array(g, A, Q * K.CELL_SIZE), C = new DataView(g, A, Q * K.CELL_SIZE);
     for (let I = 0; I < Q; I++) {
-      const D = I * r.CELL_SIZE, o = this.cellPool[I];
+      const D = I * K.CELL_SIZE, o = this.cellPool[I];
       o.codepoint = C.getUint32(D, !0), o.fg_r = E[D + 4], o.fg_g = E[D + 5], o.fg_b = E[D + 6], o.bg_r = E[D + 7], o.bg_g = E[D + 8], o.bg_b = E[D + 9], o.flags = E[D + 10], o.width = E[D + 11], o.hyperlink_id = C.getUint16(D + 12, !0), o.grapheme_len = E[D + 14];
     }
   }
@@ -453,8 +453,8 @@ const z = class r {
     this.viewportBufferPtr && (this.exports.ghostty_wasm_free_u8_array(this.viewportBufferPtr, this.viewportBufferSize), this.viewportBufferPtr = 0, this.viewportBufferSize = 0);
   }
 };
-z.CELL_SIZE = 16;
-let Z = z;
+W.CELL_SIZE = 16;
+let v = W;
 class J {
   constructor() {
     this.listeners = [], this.event = (A) => (this.listeners.push(A), {
@@ -472,7 +472,7 @@ class J {
     this.listeners = [];
   }
 }
-class j {
+class X {
   constructor(A) {
     this.bufferChangeEmitter = new J(), this.terminal = A;
   }
@@ -481,10 +481,10 @@ class j {
     return A ? A.isAlternateScreen() ? this.alternate : this.normal : this.normal;
   }
   get normal() {
-    return this._normalBuffer || (this._normalBuffer = new f(this.terminal, "normal")), this._normalBuffer;
+    return this._normalBuffer || (this._normalBuffer = new u(this.terminal, "normal")), this._normalBuffer;
   }
   get alternate() {
-    return this._alternateBuffer || (this._alternateBuffer = new f(this.terminal, "alternate")), this._alternateBuffer;
+    return this._alternateBuffer || (this._alternateBuffer = new u(this.terminal, "alternate")), this._alternateBuffer;
   }
   get onBufferChange() {
     return this.bufferChangeEmitter.event;
@@ -497,7 +497,7 @@ class j {
     this.bufferChangeEmitter.fire(A);
   }
 }
-class f {
+class u {
   constructor(A, Q) {
     this.terminal = A, this.bufferType = Q;
     const g = {
@@ -548,7 +548,7 @@ class f {
     } else
       C = this.bufferType === "normal" ? A - g : A, E = Q.getLine(C), I = Q.isRowWrapped(C);
     if (E)
-      return new P(E, I, Q.cols);
+      return new _(E, I, Q.cols);
   }
   getNullCell() {
     return this.nullCell;
@@ -557,7 +557,7 @@ class f {
     return this.terminal.wasmTerm;
   }
 }
-class P {
+class _ {
   constructor(A, Q, g) {
     this.cells = A, this._isWrapped = Q, this._length = g;
   }
@@ -671,7 +671,7 @@ class O {
     return (this.cell.flags & G.FAINT) !== 0;
   }
 }
-class v {
+class $ {
   constructor(A = 1e4) {
     this.byNumericId = /* @__PURE__ */ new Map(), this.byExplicitId = /* @__PURE__ */ new Map(), this.byUri = /* @__PURE__ */ new Map(), this.nextInternalId = 1, this.maxEntries = A;
   }
@@ -738,7 +738,7 @@ class v {
     }
   }
 }
-function X(B, A) {
+function AA(B, A) {
   const Q = /* @__PURE__ */ new Map(), g = typeof B == "string" ? B : new TextDecoder().decode(B), E = /\x1b]8;([^;]*);([^\x07\x1b]*)(?:\x07|\x1b\\)/g;
   let C;
   for (; (C = E.exec(g)) !== null; ) {
@@ -754,7 +754,7 @@ function X(B, A) {
   }
   return Q;
 }
-const _ = {
+const QA = {
   // Letters
   KeyA: i.A,
   KeyB: i.B,
@@ -874,7 +874,7 @@ const _ = {
   F22: i.F22,
   F23: i.F23,
   F24: i.F24
-}, V = class y {
+}, Z = class y {
   /**
    * Create a new InputHandler
    * @param ghostty - Ghostty instance (for creating KeyEncoder)
@@ -909,7 +909,7 @@ const _ = {
    * @returns Key enum value or null if unmapped
    */
   mapKeyCode(A) {
-    return _[A] ?? null;
+    return QA[A] ?? null;
   }
   /**
    * Extract modifier flags from KeyboardEvent
@@ -917,8 +917,8 @@ const _ = {
    * @returns Mods flags
    */
   extractModifiers(A) {
-    let Q = K.NONE;
-    return A.shiftKey && (Q |= K.SHIFT), A.ctrlKey && (Q |= K.CTRL), A.altKey && (Q |= K.ALT), A.metaKey && (Q |= K.SUPER), Q;
+    let Q = r.NONE;
+    return A.shiftKey && (Q |= r.SHIFT), A.ctrlKey && (Q |= r.CTRL), A.altKey && (Q |= r.ALT), A.metaKey && (Q |= r.SUPER), Q;
   }
   /**
    * Check if this is a printable character with no special modifiers
@@ -953,14 +953,14 @@ const _ = {
     if (Q === null)
       return;
     const g = this.extractModifiers(A);
-    if (g === K.NONE || g === K.SHIFT) {
+    if (g === r.NONE || g === r.SHIFT) {
       let C = null;
       switch (Q) {
         case i.ENTER:
           C = "\r";
           break;
         case i.TAB:
-          g === K.SHIFT ? C = "\x1B[Z" : C = "	";
+          g === r.SHIFT ? C = "\x1B[Z" : C = "	";
           break;
         case i.BACKSPACE:
           C = "";
@@ -1028,7 +1028,7 @@ const _ = {
         return;
       }
     }
-    const E = u.PRESS;
+    const E = V.PRESS;
     try {
       if (this.getModeCallback) {
         const w = this.getModeCallback(1);
@@ -1348,9 +1348,9 @@ const _ = {
     return !this.isDisposed;
   }
 };
-V.BEFORE_INPUT_IGNORE_MS = 100;
-let $ = V;
-class AA {
+Z.BEFORE_INPUT_IGNORE_MS = 100;
+let BA = Z;
+class gA {
   // Terminal instance for buffer access
   constructor(A) {
     this.terminal = A, this.providers = [], this.linkCache = /* @__PURE__ */ new Map(), this.scannedRows = /* @__PURE__ */ new Set();
@@ -1465,7 +1465,7 @@ class AA {
     this.providers = [];
   }
 }
-class QA {
+class EA {
   constructor(A) {
     this.terminal = A;
   }
@@ -1638,8 +1638,8 @@ const p = class q {
 };
 p.URL_REGEX = /(?:https?:\/\/|mailto:|ftp:\/\/|ssh:\/\/|git:\/\/|tel:|magnet:|gemini:\/\/|gopher:\/\/|news:)[\w\-.~:\/?#@!$&*+,;=%]+/gi;
 p.TRAILING_PUNCTUATION = /[.,;!?)\]]+$/;
-let BA = p;
-const b = {
+let CA = p;
+const z = {
   foreground: "#d4d4d4",
   background: "#1e1e1e",
   cursor: "#ffffff",
@@ -1665,13 +1665,13 @@ const b = {
   brightCyan: "#29b8db",
   brightWhite: "#ffffff"
 };
-class gA {
+class IA {
   constructor(A, Q = {}) {
     this.cursorVisible = !0, this.lastCursorPosition = { x: 0, y: 0 }, this.lastViewportY = 0, this.currentBuffer = null, this.currentSelectionCoords = null, this.hoveredHyperlinkId = 0, this.previousHoveredHyperlinkId = 0, this.hoveredLinkRange = null, this.previousHoveredLinkRange = null, this.canvas = A;
     const g = A.getContext("2d", { alpha: !0 });
     if (!g)
       throw new Error("Failed to get 2D rendering context");
-    this.ctx = g, this.fontSize = Q.fontSize ?? 15, this.fontFamily = Q.fontFamily ?? "monospace", this.cursorStyle = Q.cursorStyle ?? "block", this.cursorBlink = Q.cursorBlink ?? !1, this.theme = { ...b, ...Q.theme }, this.devicePixelRatio = Q.devicePixelRatio ?? window.devicePixelRatio ?? 1, this.palette = [
+    this.ctx = g, this.fontSize = Q.fontSize ?? 15, this.fontFamily = Q.fontFamily ?? "monospace", this.cursorStyle = Q.cursorStyle ?? "block", this.cursorBlink = Q.cursorBlink ?? !1, this.theme = { ...z, ...Q.theme }, this.devicePixelRatio = Q.devicePixelRatio ?? window.devicePixelRatio ?? 1, this.palette = [
       this.theme.black,
       this.theme.red,
       this.theme.green,
@@ -1930,7 +1930,7 @@ class gA {
    * Update theme colors
    */
   setTheme(A) {
-    this.theme = { ...b, ...A }, this.palette = [
+    this.theme = { ...z, ...A }, this.palette = [
       this.theme.black,
       this.theme.red,
       this.theme.green,
@@ -1982,13 +1982,13 @@ class gA {
    * @param opacity Opacity level (0-1) for fade in/out effect
    */
   renderScrollbar(A, Q, g, E = 1) {
-    const C = this.ctx, I = this.canvas.height / this.devicePixelRatio, D = this.canvas.width / this.devicePixelRatio, o = 8, w = D - o - 4, s = 4, h = I - s * 2;
+    const C = this.ctx, I = this.canvas.height / this.devicePixelRatio, D = this.canvas.width / this.devicePixelRatio, o = 8, w = D - o - 4, s = 2, h = I - s * 2;
     if (C.fillStyle = this.theme.background, C.fillRect(w - 2, 0, o + 6, I), E <= 0 || Q === 0)
       return;
     const a = Q + g, t = Math.max(20, g / a * h), k = A / Q, N = s + (h - t) * (1 - k);
-    C.fillStyle = `rgba(128, 128, 128, ${0.1 * E})`, C.fillRect(w, s, o, h);
-    const U = A > 0 ? 0.5 : 0.3;
-    C.fillStyle = `rgba(128, 128, 128, ${U * E})`, C.fillRect(w, N, o, t);
+    C.fillStyle = `rgba(180, 180, 180, ${0.15 * E})`, C.fillRect(w, s, o, h);
+    const U = A > 0 ? 0.6 : 0.4;
+    C.fillStyle = `rgba(200, 200, 200, ${U * E})`, C.fillRect(w, N, o, t);
   }
   getMetrics() {
     return { ...this.metrics };
@@ -2054,7 +2054,7 @@ class gA {
     this.stopCursorBlink();
   }
 }
-const n = class L {
+const l = class L {
   // ms between scroll steps
   constructor(A, Q, g, E) {
     this.selectionStart = null, this.selectionEnd = null, this.isSelecting = !1, this.mouseDownTarget = null, this.dirtySelectionRows = /* @__PURE__ */ new Set(), this.selectionChangedEmitter = new J(), this.boundMouseUpHandler = null, this.boundContextMenuHandler = null, this.boundClickHandler = null, this.boundDocumentMouseMoveHandler = null, this.autoScrollInterval = null, this.autoScrollDirection = 0, this.terminal = A, this.renderer = Q, this.wasmTerm = g, this.textarea = E, this.attachEventListeners();
@@ -2466,18 +2466,18 @@ const n = class L {
   requestRender() {
   }
 };
-n.AUTO_SCROLL_EDGE_SIZE = 30;
-n.AUTO_SCROLL_SPEED = 3;
-n.AUTO_SCROLL_INTERVAL = 50;
-let EA = n;
-class wA {
+l.AUTO_SCROLL_EDGE_SIZE = 30;
+l.AUTO_SCROLL_SPEED = 3;
+l.AUTO_SCROLL_INTERVAL = 50;
+let DA = l;
+class MA {
   // 200ms fade animation
   constructor(A = {}) {
     this.unicode = {
       get activeVersion() {
         return "15.1";
       }
-    }, this.hyperlinkRegistry = new v(), this.dataEmitter = new J(), this.resizeEmitter = new J(), this.bellEmitter = new J(), this.selectionChangeEmitter = new J(), this.keyEmitter = new J(), this.titleChangeEmitter = new J(), this.scrollEmitter = new J(), this.renderEmitter = new J(), this.cursorMoveEmitter = new J(), this.onData = this.dataEmitter.event, this.onResize = this.resizeEmitter.event, this.onBell = this.bellEmitter.event, this.onSelectionChange = this.selectionChangeEmitter.event, this.onKey = this.keyEmitter.event, this.onTitleChange = this.titleChangeEmitter.event, this.onScroll = this.scrollEmitter.event, this.onRender = this.renderEmitter.event, this.onCursorMove = this.cursorMoveEmitter.event, this.isOpen = !1, this.isDisposed = !1, this.addons = [], this.currentTitle = "", this.viewportY = 0, this.targetViewportY = 0, this.lastCursorY = 0, this.isDraggingScrollbar = !1, this.scrollbarDragStart = null, this.scrollbarDragStartViewportY = 0, this.scrollbarVisible = !1, this.scrollbarOpacity = 0, this.SCROLLBAR_HIDE_DELAY_MS = 1500, this.SCROLLBAR_FADE_DURATION_MS = 200, this.animateScroll = () => {
+    }, this.hyperlinkRegistry = new $(), this.dataEmitter = new J(), this.resizeEmitter = new J(), this.bellEmitter = new J(), this.selectionChangeEmitter = new J(), this.keyEmitter = new J(), this.titleChangeEmitter = new J(), this.scrollEmitter = new J(), this.renderEmitter = new J(), this.cursorMoveEmitter = new J(), this.onData = this.dataEmitter.event, this.onResize = this.resizeEmitter.event, this.onBell = this.bellEmitter.event, this.onSelectionChange = this.selectionChangeEmitter.event, this.onKey = this.keyEmitter.event, this.onTitleChange = this.titleChangeEmitter.event, this.onScroll = this.scrollEmitter.event, this.onRender = this.renderEmitter.event, this.onCursorMove = this.cursorMoveEmitter.event, this.isOpen = !1, this.isDisposed = !1, this.addons = [], this.oscHandlers = /* @__PURE__ */ new Map(), this.currentTitle = "", this.viewportY = 0, this.targetViewportY = 0, this.lastCursorY = 0, this.isDraggingScrollbar = !1, this.scrollbarDragStart = null, this.scrollbarDragStartViewportY = 0, this.scrollbarVisible = !1, this.scrollbarOpacity = 0, this.SCROLLBAR_HIDE_DELAY_MS = 1500, this.SCROLLBAR_FADE_DURATION_MS = 200, this.animateScroll = () => {
       if (!this.wasmTerm || this.scrollAnimationStartTime === void 0)
         return;
       const g = this.options.smoothScrollDuration ?? 100, E = this.targetViewportY - this.viewportY;
@@ -2561,13 +2561,13 @@ class wA {
         if (D >= M && D <= M + e)
           this.isDraggingScrollbar = !0, this.scrollbarDragStart = D, this.scrollbarDragStartViewportY = this.viewportY, this.canvas && (this.canvas.style.userSelect = "none", this.canvas.style.webkitUserSelect = "none");
         else {
-          const F = 1 - (D - a) / t, l = Math.round(F * E);
-          this.scrollToLine(Math.max(0, Math.min(E, l)));
+          const F = 1 - (D - a) / t, n = Math.round(F * E);
+          this.scrollToLine(Math.max(0, Math.min(E, n)));
         }
       }
     }, this.handleMouseUp = () => {
       this.isDraggingScrollbar && (this.isDraggingScrollbar = !1, this.scrollbarDragStart = null, this.canvas && (this.canvas.style.userSelect = "", this.canvas.style.webkitUserSelect = ""), this.scrollbarVisible && this.getScrollbackLength() > 0 && this.showScrollbar());
-    }, this.ghostty = A.ghostty ?? iA();
+    }, this.ghostty = A.ghostty ?? tA();
     const Q = {
       cols: A.cols ?? 80,
       rows: A.rows ?? 24,
@@ -2588,7 +2588,7 @@ class wA {
         const I = g[E];
         return g[E] = C, this.isOpen && this.handleOptionChange(E, C, I), !0;
       }
-    }), this.cols = this.options.cols, this.rows = this.options.rows, this.buffer = new j(this);
+    }), this.cols = this.options.cols, this.rows = this.options.rows, this.buffer = new X(this);
   }
   // ==========================================================================
   // Option Change Handling (for mutable options)
@@ -2711,7 +2711,7 @@ class wA {
         o.preventDefault(), g.focus();
       }), this.canvas.addEventListener("touchend", (o) => {
         o.preventDefault(), g.focus();
-      }), this.renderer = new gA(this.canvas, {
+      }), this.renderer = new IA(this.canvas, {
         fontSize: this.options.fontSize,
         fontFamily: this.options.fontFamily,
         cursorStyle: this.options.cursorStyle,
@@ -2731,7 +2731,7 @@ class wA {
           return { left: o.left, top: o.top };
         }
       };
-      this.inputHandler = new $(
+      this.inputHandler = new BA(
         this.ghostty,
         A,
         (o) => {
@@ -2751,14 +2751,14 @@ class wA {
         () => this.copySelection(),
         this.textarea,
         D
-      ), this.selectionManager = new EA(
+      ), this.selectionManager = new DA(
         this,
         this.renderer,
         this.wasmTerm,
         this.textarea
       ), this.renderer.setSelectionManager(this.selectionManager), this.selectionManager.onSelectionChange(() => {
         this.selectionChangeEmitter.fire();
-      }), this.linkDetector = new AA(this), this.linkDetector.registerProvider(new QA(this)), this.linkDetector.registerProvider(new BA(this)), A.addEventListener("mousedown", this.handleMouseDown, { capture: !0 }), A.addEventListener("mousemove", this.handleMouseMove), A.addEventListener("mouseleave", this.handleMouseLeave), A.addEventListener("click", this.handleClick), document.addEventListener("mouseup", this.handleMouseUp), A.addEventListener("wheel", this.handleWheel, { passive: !1, capture: !0 }), this.renderer.render(this.wasmTerm, !0, this.viewportY, this, this.scrollbarOpacity), this.startRenderLoop(), this.focus();
+      }), this.linkDetector = new gA(this), this.linkDetector.registerProvider(new EA(this)), this.linkDetector.registerProvider(new CA(this)), A.addEventListener("mousedown", this.handleMouseDown, { capture: !0 }), A.addEventListener("mousemove", this.handleMouseMove), A.addEventListener("mouseleave", this.handleMouseLeave), A.addEventListener("click", this.handleClick), document.addEventListener("mouseup", this.handleMouseUp), A.addEventListener("wheel", this.handleWheel, { passive: !1, capture: !0 }), this.renderer.render(this.wasmTerm, !0, this.viewportY, this, this.scrollbarOpacity), this.startRenderLoop(), this.focus();
     } catch (Q) {
       throw this.isOpen = !1, this.cleanupComponents(), new Error(`Failed to open terminal: ${Q}`);
     }
@@ -2775,7 +2775,13 @@ class wA {
    */
   writeInternal(A, Q) {
     var g;
-    X(A, this.hyperlinkRegistry), this.wasmTerm.write(A), this.processTerminalResponses(), typeof A == "string" && A.includes("\x07") ? this.bellEmitter.fire() : A instanceof Uint8Array && A.includes(7) && this.bellEmitter.fire(), (g = this.linkDetector) == null || g.invalidateCache(), this.viewportY !== 0 && this.scrollToBottom(), typeof A == "string" && A.includes("\x1B]") && this.checkForTitleChange(A), Q && requestAnimationFrame(Q);
+    if (AA(A, this.hyperlinkRegistry), this.wasmTerm.write(A), this.processTerminalResponses(), typeof A == "string" && A.includes("\x07") ? this.bellEmitter.fire() : A instanceof Uint8Array && A.includes(7) && this.bellEmitter.fire(), (g = this.linkDetector) == null || g.invalidateCache(), this.viewportY !== 0 && this.scrollToBottom(), typeof A == "string" && A.includes("\x1B]"))
+      this.checkForTitleChange(A), this.dispatchOscSequences(A);
+    else if (A instanceof Uint8Array && this.oscHandlers.size > 0) {
+      const E = new TextDecoder().decode(A);
+      E.includes("\x1B]") && this.dispatchOscSequences(E);
+    }
+    Q && requestAnimationFrame(Q);
   }
   /**
    * Write data with newline
@@ -2976,6 +2982,47 @@ class wA {
       throw new Error("Terminal must be opened before registering link providers");
     this.linkDetector.registerProvider(A);
   }
+  /**
+   * Register a handler for a specific OSC sequence code
+   *
+   * OSC (Operating System Command) sequences allow terminals to handle custom
+   * commands. This method allows registering handlers for specific OSC codes
+   * (e.g., OSC 77 for custom link protocols).
+   *
+   * Multiple handlers can be registered for the same code. Handlers are called
+   * in registration order. If a handler returns true, subsequent handlers are
+   * skipped.
+   *
+   * @param code The OSC code number to handle (e.g., 77)
+   * @param handler Function that receives the OSC payload and returns true
+   *                to stop processing or false to continue to other handlers.
+   *                Can be async.
+   * @returns IDisposable to unregister the handler
+   *
+   * @example
+   * ```typescript
+   * // Register handler for OSC 77 (custom links)
+   * const disposable = term.registerOscHandler(77, (data) => {
+   *   console.log('Received OSC 77:', data);
+   *   return true; // Handled, stop processing
+   * });
+   *
+   * // Later, to unregister:
+   * disposable.dispose();
+   * ```
+   */
+  registerOscHandler(A, Q) {
+    let g = this.oscHandlers.get(A);
+    return g || (g = [], this.oscHandlers.set(A, g)), g.push(Q), {
+      dispose: () => {
+        const E = this.oscHandlers.get(A);
+        if (E) {
+          const C = E.indexOf(Q);
+          C !== -1 && E.splice(C, 1), E.length === 0 && this.oscHandlers.delete(A);
+        }
+      }
+    };
+  }
   // ==========================================================================
   // Phase 2: Scrolling Methods
   // ==========================================================================
@@ -3126,18 +3173,24 @@ class wA {
     else
       a = h + C;
     this.linkDetector.getLinkAt(g, a).then((N) => {
-      var e, U, M, c;
-      if (N !== this.currentHoveredLink && ((U = (e = this.currentHoveredLink) == null ? void 0 : e.hover) == null || U.call(e, !1), this.currentHoveredLink = N, (M = N == null ? void 0 : N.hover) == null || M.call(N, !0), this.element && (this.element.style.cursor = N ? "pointer" : "text"), this.renderer))
-        if (N) {
-          const F = ((c = this.wasmTerm) == null ? void 0 : c.getScrollbackLength()) || 0, l = this.getViewportY(), x = Math.max(0, Math.floor(l)), T = N.range.start.y - F + x, d = N.range.end.y - F + x;
-          T < this.rows && d >= 0 ? this.renderer.setHoveredLinkRange({
-            startX: N.range.start.x,
-            startY: Math.max(0, T),
-            endX: N.range.end.x,
-            endY: Math.min(this.rows - 1, d)
-          }) : this.renderer.setHoveredLinkRange(null);
-        } else
-          this.renderer.setHoveredLinkRange(null);
+      var e, U, M, c, F, n;
+      if (N !== this.currentHoveredLink) {
+        if ((U = (e = this.currentHoveredLink) == null ? void 0 : e.hover) == null || U.call(e, !1), this.currentHoveredLink = N, (M = N == null ? void 0 : N.hover) == null || M.call(N, !0), this.element) {
+          const x = N && ((c = N.decorations) == null ? void 0 : c.pointerCursor) !== !1;
+          this.element.style.cursor = x ? "pointer" : "text";
+        }
+        if (this.renderer)
+          if (N && ((F = N.decorations) == null ? void 0 : F.underline) !== !1) {
+            const T = ((n = this.wasmTerm) == null ? void 0 : n.getScrollbackLength()) || 0, j = this.getViewportY(), d = Math.max(0, Math.floor(j)), m = N.range.start.y - T + d, f = N.range.end.y - T + d;
+            m < this.rows && f >= 0 ? this.renderer.setHoveredLinkRange({
+              startX: N.range.start.x,
+              startY: Math.max(0, m),
+              endX: N.range.end.x,
+              endY: Math.min(this.rows - 1, f)
+            }) : this.renderer.setHoveredLinkRange(null);
+          } else
+            this.renderer.setHoveredLinkRange(null);
+      }
     }).catch((N) => {
       console.warn("Link detection error:", N);
     });
@@ -3213,6 +3266,39 @@ class wA {
       }
   }
   /**
+   * Parse and dispatch OSC sequences to registered handlers
+   *
+   * OSC format: ESC ] <code> ; <payload> BEL (or ST)
+   * - ESC = \x1b
+   * - code = numeric code
+   * - payload = data after the semicolon
+   * - BEL = \x07 or ST = ESC \
+   *
+   * @param data The data to parse for OSC sequences
+   */
+  dispatchOscSequences(A) {
+    if (this.oscHandlers.size === 0)
+      return;
+    const Q = /\x1b\](\d+);([^\x07\x1b]*?)(?:\x07|\x1b\\)/g;
+    let g = null;
+    for (; (g = Q.exec(A)) !== null; ) {
+      const E = Number.parseInt(g[1], 10), C = g[2], I = this.oscHandlers.get(E);
+      if (I)
+        for (const D of I)
+          try {
+            const o = D(C);
+            if (o instanceof Promise)
+              o.catch((w) => {
+                console.warn(`OSC ${E} handler error:`, w);
+              });
+            else if (o === !0)
+              break;
+          } catch (o) {
+            console.warn(`OSC ${E} handler error:`, o);
+          }
+    }
+  }
+  /**
    * Check for title changes in written data (OSC sequences)
    * Simplified implementation - looks for OSC 0, 1, 2
    */
@@ -3256,8 +3342,8 @@ class wA {
     return this.assertOpen(), this.wasmTerm.hasMouseTracking();
   }
 }
-const CA = 2, IA = 1, DA = 15, oA = 100;
-class sA {
+const oA = 2, iA = 1, wA = 15, sA = 100;
+class hA {
   constructor() {
     this._isResizing = !1;
   }
@@ -3324,7 +3410,7 @@ class sA {
     const C = window.getComputedStyle(E), I = Number.parseInt(C.getPropertyValue("padding-top")) || 0, D = Number.parseInt(C.getPropertyValue("padding-bottom")) || 0, o = Number.parseInt(C.getPropertyValue("padding-left")) || 0, w = Number.parseInt(C.getPropertyValue("padding-right")) || 0, s = E.clientWidth, h = E.clientHeight;
     if (s === 0 || h === 0)
       return;
-    const a = s - o - w - DA, t = h - I - D, k = Math.max(CA, Math.floor(a / g.width)), N = Math.max(IA, Math.floor(t / g.height));
+    const a = s - o - w - wA, t = h - I - D, k = Math.max(oA, Math.floor(a / g.width)), N = Math.max(iA, Math.floor(t / g.height));
     return { cols: k, rows: N };
   }
   /**
@@ -3341,15 +3427,15 @@ class sA {
     (A = this._terminal) != null && A.element && (this._resizeObserver || (this._resizeObserver = new ResizeObserver((Q) => {
       this._isResizing || !Q[0] || (this._resizeDebounceTimer && clearTimeout(this._resizeDebounceTimer), this._resizeDebounceTimer = setTimeout(() => {
         this.fit();
-      }, oA));
+      }, sA));
     }), this._resizeObserver.observe(this._terminal.element)));
   }
 }
 let R = null;
-async function tA() {
+async function aA() {
   R || (R = await Y.load());
 }
-function iA() {
+function tA() {
   if (!R)
     throw new Error(
       `ghostty-web not initialized. Call init() before creating Terminal instances.
@@ -3366,22 +3452,22 @@ For tests, pass a Ghostty instance directly:
   return R;
 }
 export {
-  gA as CanvasRenderer,
+  IA as CanvasRenderer,
   G as CellFlags,
   J as EventEmitter,
-  sA as FitAddon,
+  hA as FitAddon,
   Y as Ghostty,
-  Z as GhosttyTerminal,
-  v as HyperlinkRegistry,
-  $ as InputHandler,
-  W as KeyEncoder,
+  v as GhosttyTerminal,
+  $ as HyperlinkRegistry,
+  BA as InputHandler,
+  P as KeyEncoder,
   H as KeyEncoderOption,
-  AA as LinkDetector,
-  QA as OSC8LinkProvider,
-  EA as SelectionManager,
-  wA as Terminal,
-  BA as UrlRegexProvider,
-  iA as getGhostty,
-  tA as init,
-  X as parseOsc8Sequences
+  gA as LinkDetector,
+  EA as OSC8LinkProvider,
+  DA as SelectionManager,
+  MA as Terminal,
+  CA as UrlRegexProvider,
+  tA as getGhostty,
+  aA as init,
+  AA as parseOsc8Sequences
 };

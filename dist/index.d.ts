@@ -724,6 +724,27 @@ export declare interface ILink {
     hover?(isHovered: boolean): void;
     /** Optional: called to clean up resources */
     dispose?(): void;
+    /**
+     * Optional decorations to control how the link is displayed.
+     * If not provided, default styling is used (underline + pointer cursor on hover).
+     */
+    decorations?: ILinkDecorations;
+}
+
+/**
+ * Decorations for link styling
+ */
+export declare interface ILinkDecorations {
+    /**
+     * Whether to show pointer cursor when hovering over the link.
+     * Default: true
+     */
+    pointerCursor?: boolean;
+    /**
+     * Whether to underline the link on hover.
+     * Default: true
+     */
+    underline?: boolean;
 }
 
 /**
@@ -1719,6 +1740,7 @@ export declare class Terminal implements ITerminalCore {
     private animationFrameId?;
     private addons;
     private customKeyEventHandler?;
+    private oscHandlers;
     private currentTitle;
     viewportY: number;
     private targetViewportY;
@@ -1890,6 +1912,36 @@ export declare class Terminal implements ITerminalCore {
      */
     registerLinkProvider(provider: ILinkProvider): void;
     /**
+     * Register a handler for a specific OSC sequence code
+     *
+     * OSC (Operating System Command) sequences allow terminals to handle custom
+     * commands. This method allows registering handlers for specific OSC codes
+     * (e.g., OSC 77 for custom link protocols).
+     *
+     * Multiple handlers can be registered for the same code. Handlers are called
+     * in registration order. If a handler returns true, subsequent handlers are
+     * skipped.
+     *
+     * @param code The OSC code number to handle (e.g., 77)
+     * @param handler Function that receives the OSC payload and returns true
+     *                to stop processing or false to continue to other handlers.
+     *                Can be async.
+     * @returns IDisposable to unregister the handler
+     *
+     * @example
+     * ```typescript
+     * // Register handler for OSC 77 (custom links)
+     * const disposable = term.registerOscHandler(77, (data) => {
+     *   console.log('Received OSC 77:', data);
+     *   return true; // Handled, stop processing
+     * });
+     *
+     * // Later, to unregister:
+     * disposable.dispose();
+     * ```
+     */
+    registerOscHandler(code: number, handler: (data: string) => boolean | Promise<boolean>): IDisposable;
+    /**
      * Scroll viewport by a number of lines
      * @param amount Number of lines to scroll (positive = down, negative = up)
      */
@@ -2013,6 +2065,18 @@ export declare class Terminal implements ITerminalCore {
      * buffered data is written all at once during terminal initialization).
      */
     private processTerminalResponses;
+    /**
+     * Parse and dispatch OSC sequences to registered handlers
+     *
+     * OSC format: ESC ] <code> ; <payload> BEL (or ST)
+     * - ESC = \x1b
+     * - code = numeric code
+     * - payload = data after the semicolon
+     * - BEL = \x07 or ST = ESC \
+     *
+     * @param data The data to parse for OSC sequences
+     */
+    private dispatchOscSequences;
     /**
      * Check for title changes in written data (OSC sequences)
      * Simplified implementation - looks for OSC 0, 1, 2
