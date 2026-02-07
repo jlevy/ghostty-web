@@ -850,7 +850,7 @@ export class CanvasRenderer {
     // Scrollbar dimensions
     const scrollbarWidth = 8;
     const scrollbarX = canvasWidth - scrollbarWidth - 4;
-    const scrollbarPadding = 4;
+    const scrollbarPadding = 2; // Minimal padding for cleaner edge alignment
     const scrollbarTrackHeight = canvasHeight - scrollbarPadding * 2;
 
     // Always clear the scrollbar area first (fixes ghosting when fading out)
@@ -869,13 +869,13 @@ export class CanvasRenderer {
     const thumbY = scrollbarPadding + (scrollbarTrackHeight - thumbHeight) * (1 - scrollPosition);
 
     // Draw scrollbar track (subtle background) with opacity
-    ctx.fillStyle = `rgba(128, 128, 128, ${0.1 * opacity})`;
+    ctx.fillStyle = `rgba(180, 180, 180, ${0.15 * opacity})`;
     ctx.fillRect(scrollbarX, scrollbarPadding, scrollbarWidth, scrollbarTrackHeight);
 
-    // Draw scrollbar thumb with opacity
+    // Draw scrollbar thumb with opacity - lighter gray for better visibility
     const isScrolled = viewportY > 0;
-    const baseOpacity = isScrolled ? 0.5 : 0.3;
-    ctx.fillStyle = `rgba(128, 128, 128, ${baseOpacity * opacity})`;
+    const baseOpacity = isScrolled ? 0.6 : 0.4;
+    ctx.fillStyle = `rgba(200, 200, 200, ${baseOpacity * opacity})`;
     ctx.fillRect(scrollbarX, thumbY, scrollbarWidth, thumbHeight);
   }
   public getMetrics(): FontMetrics {
