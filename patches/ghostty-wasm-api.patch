@@ -1091,7 +1091,7 @@ index 000000000..d57b4e405
 +                    .wide => 2,
 +                    .spacer_tail, .spacer_head => 0,
 +                },
-+                .hyperlink_id = if (cell.hyperlink) 1 else 0,
++                .hyperlink_id = if (cell.hyperlink) page.lookupHyperlink(cell) orelse 0 else 0,
 +                .grapheme_len = grapheme_len,
 +            };
 +            idx += 1;
@@ -1283,7 +1283,7 @@ index 000000000..d57b4e405
 +                .wide => 2,
 +                .spacer_tail, .spacer_head => 0,
 +            },
-+            .hyperlink_id = if (cell.hyperlink) 1 else 0,
++            .hyperlink_id = if (cell.hyperlink) page.lookupHyperlink(cell) orelse 0 else 0,
 +            .grapheme_len = grapheme_len,
 +        };
 +    }
